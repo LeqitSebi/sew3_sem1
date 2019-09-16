@@ -1,14 +1,18 @@
 package slanitsch.ue00;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CollectionsTest {
 
+    @Test
+
     public static void main(String[] args) {
-        LinkedList<Double> test = new LinkedList<>();
-        test.addAll(Arrays.asList(new Double[]{100d, 130d, 200d, 110d, 175d, 160d}));
+        LinkedList<Double> test = new LinkedList<>(Arrays.asList(100d, 130d, 200d, 110d, 175d, 160d, 1d));
         cleanValues(test);
         System.out.println(test);
     }
@@ -37,18 +41,26 @@ public class CollectionsTest {
         return output;
     }
 
-    public static void cleanValues(List<Double> data) {
-        int total = 0;
-        for (int i = 0; i < data.size(); i++) {
-            total += data.get(i);
+    private static void cleanValues(List<Double> data) {
+        double min = data.get(0);
+        double max = data.get(0);
+        for (double d : data) {
+            if (d < min) {
+                min = d;
+            }
+            if (d > max) {
+                max = d;
+            }
         }
-        int[] quarters = new int[4];
-        for (int i = 0; i < 3; i++) {
-            quarters[i] = total / 4 * (i + 1);
-        }
-        for (int i = 0; i < data.size(); i++) {
-            if (!(data.get(i) >= quarters[2] && data.get(i) <= quarters[3])) {
-                data.remove(i);
+        double range = max - min;
+        double teil = range / 4;
+        Iterator<Double> it = data.iterator();
+        while (it.hasNext()) {
+            if (it.next() < min + teil) {
+                it.remove();
+            }
+            if (it.next() < min + 4 * teil && it.next() > min + 3 * teil) {
+                it.remove();
             }
         }
     }

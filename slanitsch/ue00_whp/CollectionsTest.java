@@ -1,4 +1,4 @@
-package slanitsch.ue00;
+package slanitsch.ue00_whp;
 
 import org.junit.jupiter.api.Test;
 

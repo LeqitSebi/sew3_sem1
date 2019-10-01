@@ -9,11 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class SubnetTest {
 
     @Test
+    public void testGetNet(){
+        IPAddress ip = new IPAddress("192.168.1.0");
+        Subnet subnet = new Subnet(ip, 24);
+
+        assertEquals(new IPAddress("192.168.1.0"), subnet.getNet(), "network wrong");
+    }
+
+    @Test
     public void testGetMask(){
         IPAddress ip = new IPAddress("192.168.1.0");
         Subnet subnet = new Subnet(ip, 24);
 
         assertEquals(new IPAddress("255.255.255.0"), subnet.getMask(), "netmask wrong");
     }
-
 }

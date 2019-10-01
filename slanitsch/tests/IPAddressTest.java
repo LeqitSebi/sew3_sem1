@@ -23,6 +23,15 @@ class IPAddressTest {
     @Test
     public void testToString() {
         IPAddress ip = new IPAddress("8.8.8.8");
+
         assertEquals("IPAddress [8.8.8.8]", ip.toString(), "toString wrong");
+    }
+
+    @Test
+    public void testCompareTo(){
+        IPAddress ip = new IPAddress("8.8.8.8");
+        IPAddress ip2 = new IPAddress("8.8.8.9");
+
+        assertEquals(1, ip.compareTo(ip2), "not equal");
     }
 }

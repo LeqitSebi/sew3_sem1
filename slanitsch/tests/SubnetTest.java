@@ -23,4 +23,12 @@ class SubnetTest {
 
         assertEquals(new IPAddress("255.255.255.0"), subnet.getMask(), "netmask wrong");
     }
+
+    @Test
+    public void testGetBroadcast(){
+        IPAddress ip = new IPAddress("192.168.1.0");
+        Subnet subnet = new Subnet(ip, 24);
+
+        assertEquals(new IPAddress("192.168.1.255"), subnet.getBroadcast(), "broadcast wrong");
+    }
 }

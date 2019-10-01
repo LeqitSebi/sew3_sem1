@@ -1,5 +1,7 @@
 package slanitsch.ue02_JUnit;
 
+import slanitsch.ue02_JUnit.IPAddress;
+
 public class Subnet {
 
 	/**
@@ -23,6 +25,9 @@ public class Subnet {
 	private void createMask(IPAddress net, int cidr) {
 		this.net = net;
 		this.mask = IPAddress.createNetmask(cidr);
+		// System.out.format("n %08x\n", this.net.getIP() & 0xffffffffl);
+		// System.out.format("m %08x\n", this.mask.getIP());
+		// System.out.format(" %08x\n", (this.net.getIP() & mask.getIP()));
 		
 		if ((this.net.getIP() & mask.getIP()) != this.net.getIP()) {
 			throw new IllegalArgumentException("bad network");
@@ -69,6 +74,11 @@ public class Subnet {
 	 * @return
 	 */
 	public boolean contains(IPAddress ip) {
+		// System.out.format("i %08x\n", ip.getIP());
+		// System.out.format("m %08x\n", mask.getIP());
+		// System.out.format("i&m %08x\n", ip.getIP() & mask.getIP());
+		// System.out.format("n %08x\n", net.getIP());
+
 		return (ip.getIP() & mask.getIP()) == net.getIP();
 	}
 

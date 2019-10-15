@@ -1,0 +1,9 @@
+Übung		Min		Erreicht
+
+Basic Main	4		10
+
+Basic Remote	6		12
+
+Easy to Hard	5		2
+
+Hardcore	0		26

@@ -23,9 +23,9 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean isIP(String ip) {
-        final Pattern ip_pattern = Pattern.compile("([\\d]+)\\.(\\d+)\\.(\\d+)\\.(\\d)");
+        final Pattern ipv4 = Pattern.compile("([\\d]+)\\.(\\d+)\\.(\\d+)\\.(\\d)");
 
-        Matcher matcher = ip_pattern.matcher(ip);
+        Matcher matcher = ipv4.matcher(ip);
 
         if (matcher.matches()) {
             for (int i = 1; i < 4; i++) {
@@ -44,10 +44,10 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean isNumber(String n) {
-        final Pattern number_pattern = Pattern.compile("\\d+|\\d.\\d+|\\d+E\\d+|" +
-                "\\d+\\.\\d+E\\d+|-\\d+|-\\d+\\d+.\\d+E\\d++|-\\d+\\d+.\\d+E-\\d++");
+        final Pattern numberpattern = Pattern.compile("\\d+|\\d.\\d+|\\d+E\\d+|"
+                + "\\d+\\.\\d+E\\d+|-\\d+|-\\d+\\d+.\\d+E\\d++|-\\d+\\d+.\\d+E-\\d++");
 
-        return n.matches(String.valueOf(number_pattern));
+        return n.matches(String.valueOf(numberpattern));
     }
 
     /**
@@ -58,11 +58,10 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean hasEvenZeros(String n) {
-        final Pattern binary_pattern = Pattern.compile("(1*01*01*)*");
-        return n.matches(String.valueOf(binary_pattern));
+        final Pattern binarypattern = Pattern.compile("(1*01*01*)*");
+        return n.matches(String.valueOf(binarypattern));
     }
 
-    //TODO: Geht nur mit geraden Zahlen
 
     /**
      * tests if string n has no doubles behind each other
@@ -71,9 +70,10 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean hasNoDoubles(String n) {
-        final Pattern number_pattern = Pattern.compile("(10)*|(01)*|1|0|(010)*|(101)*");
-        return n.matches(String.valueOf(number_pattern));
+        final Pattern numberpattern = Pattern.compile("0|1|(01)*0?|(10)*1?");
+        return n.matches(String.valueOf(numberpattern));
     }
+
 
     /**
      * tests if string n is valid class name
@@ -82,8 +82,8 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean isClassName(String n) {
-        final Pattern class_pattern = Pattern.compile("[A-Z]+[a-z]*[0-9]*_*[A-Z]*?[a-z]*?[0-9]*");
-        return n.matches(String.valueOf(class_pattern));
+        final Pattern classpattern = Pattern.compile("[A-Z]+[A-Za-z0-9](_[A-Za-z0-9]+)?");
+        return n.matches(String.valueOf(classpattern));
     }
 
     /**
@@ -93,8 +93,8 @@ public class MyFirstRegExp {
      * @return boolean
      */
     public static boolean isDate(String n) {
-        final Pattern date_pattern = Pattern.compile("(0[0-9]|[1-2][0-9]|3[0-1]|[1-9]).[ ]?(0[1-9]|1[0-2]|[1-9]).[ ]?([0-9][0-9][0-9][0-9]|[0-9][0-9])?");
-        return n.matches(String.valueOf(date_pattern));
+        final Pattern datepattern = Pattern.compile("(0[0-9]|[1-2][0-9]|3[0-1]|[1-9]).[ ]?(0[1-9]|1[0-2]|[1-9]).[ ]?([0-9]{2,4})?");
+        return n.matches(String.valueOf(datepattern));
     }
 
     /**
@@ -104,18 +104,19 @@ public class MyFirstRegExp {
      * @return firstIP
      */
     public static String getFirstIp(String s) {
-        final Pattern ip_pattern = Pattern.compile("(([\\d]+)\\.(\\d+)\\.(\\d+)\\.(\\d))+");
+        final Pattern ippattern = Pattern.compile("(([\\d]+)\\.(\\d+)\\.(\\d+)\\.(\\d))+");
 
-        if (s.matches(String.valueOf(ip_pattern))) {
-            for (int i = 0; i < s.length(); i++) {
-                String firstIP = s.substring(0, i);
-                if (firstIP.matches(String.valueOf(ip_pattern))) {
-                    return firstIP;
-                }
+        for (int i = 0; i < s.length(); i++) {
+            String firstIP = s.substring(0, i);
+            if (i == s.length()-1) {
+                i++;
+            }
+
+            if (firstIP.matches(String.valueOf(ippattern))) {
+                return firstIP;
             }
         }
-
-        return "Keine gültige IP gefunden.";
+        return null;
     }
 
     /**
@@ -123,18 +124,29 @@ public class MyFirstRegExp {
      * @param s string
      * @return firstDate
      */
+    /**
+     * gets first date in string s
+     *
+     * @param s string
+     * @return firstDate
+     */
     public static String getFirstDate(String s) {
-        final Pattern date_pattern = Pattern.compile(("((0[0-9]|[1-2][0-9]|3[0-1]|[1-9]).[ ]?(0[1-9]|1[0-2]|[1-9]).[ ]?" +
-                "([0-9][0-9][0-9][0-9]|[0-9][0-9])?)+"));
+        final Pattern datepattern = Pattern.compile(("((0[0-9]|[1-2][0-9]|3[0-1]|[1-9]).[ ]?(0[1-9]|1[0-2]|[1-9]).[ ]?"
+                + "([0-9][0-9][0-9][0-9]|[0-9][0-9])?)+"));
 
-        if (s.matches(String.valueOf(date_pattern))) {
+        if (s.matches(String.valueOf(datepattern))) {
             for (int i = 0; i < s.length(); i++) {
                 String firstDate = s.substring(0, i);
-                if (firstDate.matches(String.valueOf(date_pattern))) {
+                if (firstDate.matches(String.valueOf(datepattern))) {
                     return firstDate;
                 }
             }
         }
-        return "Kein gültiges Datum gefunden.";
+        return null;
+    }
+
+    public static String removeMultiSpaces(String s) {
+        final Pattern spacepattern = Pattern.compile("[A-za-z0-9]+[ ]+[A-za-z0-9]+");
+        return s.replaceAll(String.valueOf(spacepattern), " ");
     }
 }

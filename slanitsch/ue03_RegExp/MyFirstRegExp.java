@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
  * the exercise is about regex and patterns
  */
 public class MyFirstRegExp {
+
     /**
      * main method
      *
@@ -108,7 +109,7 @@ public class MyFirstRegExp {
 
         for (int i = 0; i < s.length(); i++) {
             String firstIP = s.substring(0, i);
-            if (i == s.length()-1) {
+            if (i == s.length() - 1) {
                 i++;
             }
 

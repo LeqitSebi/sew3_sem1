@@ -3,7 +3,13 @@ package slanitsch.ue03_RegExp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +24,9 @@ public class HTMLStringTools {
         List<String> allTags = new LinkedList<>();
         String content = "";
         try {
-            content = new Scanner(new File(fileName)).useDelimiter("\\Z").next();
-        } catch (FileNotFoundException e) {
+            content = new java.util.Scanner(new java.io.File(fileName)).useDelimiter("\\Z").next();
+            //content = new String(Files.readAllBytes(Path.of(fileName)), Charset.forName("UTF-8"));
+        } catch (java.io.FileNotFoundException e) {
             System.out.println("File not found!");
         }
         Matcher m = Pattern.compile("<[a-z]+([ ][a-z]+=\".+\")?>").matcher(content);
@@ -54,11 +61,11 @@ public class HTMLStringTools {
      * @param fileName Pfad der HTML Datei als String
      * @return Set<String>
      */
-    static Set<String> getAbsolutLinks(String fileName) {
-        Set<String> erg = new TreeSet<>();
+    static java.util.Set<String> getAbsolutLinks(String fileName) {
+        java.util.Set<String> erg = new java.util.TreeSet<>();
         String content = "";
         try {
-            content = new Scanner(new File(fileName)).useDelimiter("\\Z").next();
+            content = new java.util.Scanner(new File(fileName)).useDelimiter("\\Z").next();
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
@@ -74,10 +81,10 @@ public class HTMLStringTools {
      * @param fileName Pfad der HTML Datei als String
      * @return Set<String>
      */
-    static Set<String> getDomains(String fileName) {
-        Set<String> links = getAbsolutLinks(fileName);
+    static java.util.Set<String> getDomains(String fileName) {
+        java.util.Set<String> links = getAbsolutLinks(fileName);
         Object[] linksArray = links.toArray();
-        Set<String> erg = new TreeSet<>();
+        java.util.Set<String> erg = new java.util.TreeSet<>();
         for (Object o : linksArray) {
             String s = (String) o;
             String[] split = s.split("/");

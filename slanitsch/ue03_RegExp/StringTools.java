@@ -43,7 +43,7 @@ public class StringTools {
             if (s1.length() <= maxLen) {
                 list.add(s1);
             } else {
-                while (s1.length() > maxLen)
+                while (s1.length() > maxLen) {
                     for (int i = maxLen; i >= 0; i--) {
                         if (s1.charAt(i) == ' ') {
                             list.add(s1.substring(0, i));
@@ -51,7 +51,8 @@ public class StringTools {
                             break;
                         }
                     }
-                list.add(s1);
+                    list.add(s1);
+                }
             }
         }
         return list;

@@ -13,14 +13,17 @@ import java.awt.*;
 public class SierpinskiDreieck extends Application {
 
     public static void main(String[] args) {
+        double current = System.currentTimeMillis();
+        double after = System.currentTimeMillis();
         Application.launch(args);
+        System.out.println(after-current);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Sierpinski Dreieck");
 
-        Canvas canvas = new Canvas(850, 850);
+        Canvas canvas = new Canvas(1000, 1000);
 
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(new BorderPane(canvas)));

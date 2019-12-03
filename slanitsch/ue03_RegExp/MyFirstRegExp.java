@@ -146,7 +146,7 @@ public class MyFirstRegExp {
         return null;
     }
 
-    public static String removeMultiSpaces(String s) {
+    public static String removeMultiSpaces2(String s) {
         final Pattern spacepattern = Pattern.compile("[A-za-z0-9]+[ ]+[A-za-z0-9]+");
         return s.replaceAll(String.valueOf(spacepattern), " ");
     }

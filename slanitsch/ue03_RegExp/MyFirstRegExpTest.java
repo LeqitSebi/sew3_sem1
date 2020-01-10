@@ -11,6 +11,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static slanitsch.ue03_RegExp.HTMLStringTools.*;
 import static slanitsch.ue03_RegExp.MyFirstRegExp.*;
+import static slanitsch.ue03_RegExp.StringTools.removeMultiSpaces;
 import static slanitsch.ue03_RegExp.StringTools.splitToLines;
 
 /**
